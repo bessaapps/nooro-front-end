@@ -3,13 +3,21 @@ import axios from "axios";
 // TASKS
 
 export const createTaskAPI = (data) =>
-  axios.post("/tasks", { data }).then((response) => response);
+  axios
+    .post(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, data)
+    .then((response) => response);
 
 export const getTasksAPI = () =>
-  axios.get("/tasks").then((response) => response);
+  axios
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/tasks`)
+    .then((response) => response);
 
 export const updateTaskAPI = (data) =>
-  axios.patch("/tasks", data).then((response) => response);
+  axios
+    .patch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, data)
+    .then((response) => response);
 
 export const deleteTaskAPI = (params) =>
-  axios.delete("/tasks", { params }).then((response) => response);
+  axios
+    .delete(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, { params })
+    .then((response) => response);
