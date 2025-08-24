@@ -17,7 +17,7 @@ export const updateTaskAPI = (data) =>
     .patch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, data)
     .then((response) => response);
 
-export const deleteTaskAPI = (params) =>
+export const deleteTaskAPI = (id) =>
   axios
-    .delete(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, { params })
+    .delete(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`)
     .then((response) => response);

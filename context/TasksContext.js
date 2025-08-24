@@ -7,10 +7,10 @@ export const TasksContext = createContext(null);
 export const useTask = () => useContext(TasksContext);
 
 export const TasksProvider = ({ children }) => {
-  const [task, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   return (
-    <TasksContext.Provider value={{ task, setTasks }}>
+    <TasksContext.Provider value={{ tasks, setTasks }}>
       {children}
     </TasksContext.Provider>
   );
