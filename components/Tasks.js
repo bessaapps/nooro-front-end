@@ -76,32 +76,40 @@ export default function Tasks() {
       {tasks?.map(({ id, title, color, completed }) => (
         <Flex
           key={id}
-          bg={"gray.800"}
           align={"center"}
-          justify={"space-between"}
+          gap={4}
+          bg={"gray.800"}
+          w={"100%"}
           borderWidth={"1px"}
           borderColor={"gray.700"}
           borderRadius={8}
           p={4}
         >
-          <Flex align={"center"} gap={4}>
-            <Box cursor={"pointer"} onClick={() => toggleTask(id, !completed)}>
-              <Image
-                src={completed ? CompletedCheckbox : Checkbox}
-                alt={completed ? "Completed Checkbox" : "Checkbox"}
-              />
-            </Box>
-            <Link href={`/tasks/${id}`}>
-              <Text
-                as={completed ? "strike" : undefined}
-                color={color}
-                fontSize={14}
-              >
-                {title}
-              </Text>
-            </Link>
-          </Flex>
-          <Box cursor={"pointer"} onClick={() => destroyTask(id)}>
+          <Box
+            minW={"18px"}
+            cursor={"pointer"}
+            onClick={() => toggleTask(id, !completed)}
+          >
+            <Image
+              src={completed ? CompletedCheckbox : Checkbox}
+              alt={completed ? "Completed Checkbox" : "Checkbox"}
+            />
+          </Box>
+          <Link href={`/tasks/${id}`}>
+            <Text
+              as={completed ? "strike" : undefined}
+              color={color}
+              fontSize={14}
+            >
+              {title}
+            </Text>
+          </Link>
+          <Box
+            minW={"14px"}
+            cursor={"pointer"}
+            ml={"auto"}
+            onClick={() => destroyTask(id)}
+          >
             <Image src={Trash} alt={"Trash Can"} />
           </Box>
         </Flex>
