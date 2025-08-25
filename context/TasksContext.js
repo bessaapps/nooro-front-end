@@ -8,9 +8,12 @@ export const useTask = () => useContext(TasksContext);
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
+  const [isFetchingTasks, setIsFetchingTasks] = useState(false);
 
   return (
-    <TasksContext.Provider value={{ tasks, setTasks }}>
+    <TasksContext.Provider
+      value={{ tasks, setTasks, isFetchingTasks, setIsFetchingTasks }}
+    >
       {children}
     </TasksContext.Provider>
   );

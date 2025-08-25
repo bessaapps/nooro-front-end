@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function CreateForm() {
   const [title, setTitle] = useState("");
   const [color, setColor] = useState("");
-  const { setTasks } = useTask();
+  const { setTasks, setIsFetchingTasks } = useTask();
   const router = useRouter();
 
   const colors = [
@@ -28,6 +28,7 @@ export default function CreateForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!title) return;
+    setIsFetchingTasks(true);
 
     const insertData = { title, color };
 
@@ -36,7 +37,8 @@ export default function CreateForm() {
         setTasks((prev) => [{ id: response?.data, ...insertData }, ...prev]);
         router.push("/tasks");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => setIsFetchingTasks(false));
   };
 
   return (
