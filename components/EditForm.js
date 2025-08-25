@@ -2,16 +2,16 @@
 
 import { Box, Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useTask } from "@/context/TasksContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionButton from "@/components/ActionButton";
-import { createTaskAPI } from "@/utils/api";
+import { updateTaskAPI } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import { colors } from "@/utils/constants";
 
-export default function CreateForm() {
+export default function EditForm({ taskId }) {
   const [title, setTitle] = useState("");
   const [color, setColor] = useState("");
-  const { setTasks, setIsFetchingTasks } = useTask();
+  const { tasks, setTasks, setIsFetchingTasks } = useTask();
   const router = useRouter();
 
   const handleSubmit = (event) => {
@@ -19,16 +19,27 @@ export default function CreateForm() {
     if (!title) return;
     setIsFetchingTasks(true);
 
-    const insertData = { title, color };
+    const updateData = { title, color };
 
-    createTaskAPI(insertData)
-      .then((response) => {
-        setTasks((prev) => [{ id: response?.data, ...insertData }, ...prev]);
+    updateTaskAPI({ id: taskId, ...updateData })
+      .then(() => {
+        setTasks((prev) =>
+          prev?.map((task) =>
+            task?.id === parseInt(taskId) ? { ...task, ...updateData } : task
+          )
+        );
         router.push("/tasks");
       })
       .catch((error) => console.error(error))
       .finally(() => setIsFetchingTasks(false));
   };
+
+  useEffect(() => {
+    const activeTask = tasks?.find((task) => task?.id === parseInt(taskId));
+
+    setTitle(activeTask?.title || "");
+    setColor(activeTask?.color || "");
+  }, [tasks, taskId]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -61,7 +72,7 @@ export default function CreateForm() {
           ))}
         </Flex>
       </FormControl>
-      <ActionButton type={"submit"} anchor={"Create Task"} />
+      <ActionButton type={"submit"} anchor={"Save"} />
     </form>
   );
 }

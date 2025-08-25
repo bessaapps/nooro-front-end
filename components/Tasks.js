@@ -7,6 +7,7 @@ import CompletedCheckbox from "@/assets/images/completed-checkbox.svg";
 import Trash from "@/assets/images/icons/trash.svg";
 import Image from "next/image";
 import { deleteTaskAPI, updateTaskAPI } from "@/utils/api";
+import Link from "next/link";
 
 export default function Tasks() {
   const { tasks, setTasks, isFetchingTasks, setIsFetchingTasks } = useTask();
@@ -90,13 +91,15 @@ export default function Tasks() {
                 alt={completed ? "Completed Checkbox" : "Checkbox"}
               />
             </Box>
-            <Text
-              as={completed ? "strike" : undefined}
-              color={color}
-              fontSize={14}
-            >
-              {title}
-            </Text>
+            <Link href={`/tasks/${id}`}>
+              <Text
+                as={completed ? "strike" : undefined}
+                color={color}
+                fontSize={14}
+              >
+                {title}
+              </Text>
+            </Link>
           </Flex>
           <Box cursor={"pointer"} onClick={() => destroyTask(id)}>
             <Image src={Trash} alt={"Trash Can"} />

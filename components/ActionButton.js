@@ -5,7 +5,7 @@ import Image from "next/image";
 import Plus from "@/assets/images/icons/plus.svg";
 import { useTask } from "@/context/TasksContext";
 
-export default function ActionButton({ type }) {
+export default function ActionButton({ type, anchor }) {
   const { isFetchingTasks } = useTask();
 
   return (
@@ -15,9 +15,10 @@ export default function ActionButton({ type }) {
       w={"100%"}
       borderRadius={8}
       isLoading={isFetchingTasks}
+      _hover={{ bg: "primary.400" }}
     >
       <Flex align={"center"} justify={"center"} gap={2}>
-        <Text fontSize={14}>Create Task</Text>
+        <Text fontSize={14}>{anchor}</Text>
         <Image src={Plus} alt={"Add Symbol"} />
       </Flex>
     </Button>

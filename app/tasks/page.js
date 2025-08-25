@@ -8,7 +8,7 @@ export default function TasksPage() {
     <Stack gap={8}>
       <Box style={{ transform: "translateY(-52px)" }}>
         <Link href={"/tasks/create"}>
-          <ActionButton />
+          <ActionButton anchor={"Create Task"} />
         </Link>
       </Box>
       <Tasks />
