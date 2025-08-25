@@ -35,18 +35,41 @@ export default function Tasks() {
 
   return (
     <Stack>
-      <Flex justify={"space-between"}>
+      <Flex justify={"space-between"} mb={2}>
         <Flex gap={4}>
-          <Text colorScheme={"primary"}>Tasks</Text>
-          <Badge>{tasks?.length}</Badge>
+          <Text color={"primary.400"} fontSize={14} fontWeight={700}>
+            Tasks
+          </Text>
+          <Badge borderRadius={"full"} py={"2px"} px={2}>
+            {tasks?.length}
+          </Badge>
         </Flex>
         <Flex gap={4}>
-          <Text>Completed</Text>
-          <Badge>{tasks?.filter((task) => task?.completed)?.length}</Badge>
+          <Text color={"secondary.400"} fontSize={14} fontWeight={700}>
+            Completed
+          </Text>
+          <Badge
+            borderRadius={"full"}
+            py={"2px"}
+            px={2}
+            style={{ textTransform: "lowercase" }}
+          >
+            {tasks?.filter((task) => task?.completed)?.length} of{" "}
+            {tasks?.length}
+          </Badge>
         </Flex>
       </Flex>
       {tasks?.map(({ id, title, completed }) => (
-        <Flex key={id} align={"center"} justify={"space-between"}>
+        <Flex
+          key={id}
+          bg={"gray.800"}
+          align={"center"}
+          justify={"space-between"}
+          borderWidth={"1px"}
+          borderColor={"gray.700"}
+          borderRadius={8}
+          p={4}
+        >
           <Flex align={"center"} gap={4}>
             <Box onClick={() => toggleTask(id, !completed)}>
               <Image
@@ -54,7 +77,9 @@ export default function Tasks() {
                 alt={completed ? "Completed Checkbox" : "Checkbox"}
               />
             </Box>
-            <Text as={completed ? "strike" : undefined}>{title}</Text>
+            <Text as={completed ? "strike" : undefined} fontSize={14}>
+              {title}
+            </Text>
           </Flex>
           <Box onClick={() => destroyTask(id)}>
             <Image src={Trash} alt={"Trash Can"} />

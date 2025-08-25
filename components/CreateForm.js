@@ -20,8 +20,8 @@ export default function CreateForm() {
     const insertData = { title, color };
 
     createTaskAPI(insertData)
-      .then(() => {
-        setTasks((prev) => [insertData, ...prev]);
+      .then((response) => {
+        setTasks((prev) => [{ id: response?.data, ...insertData }, ...prev]);
         router.push("/tasks");
       })
       .catch((error) => console.error(error));

@@ -4,6 +4,7 @@ import Logo from "@/assets/images/logo.png";
 import { Providers } from "@/app/providers";
 import { TasksProvider } from "@/context/TasksContext";
 import TasksLoader from "@/components/loaders/TasksLoader";
+import Link from "next/link";
 
 export const metadata = {
   title: "Nooro Todo App"
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
         <body>
           <Providers>
             <header>
-              <Center bg={"gray.900"} h={200}>
-                <Image src={Logo} alt={"Todo App"} />
-              </Center>
+              <Link href={"/tasks"}>
+                <Center bg={"gray.900"} h={200}>
+                  <Image src={Logo} alt={"Todo App"} />
+                </Center>
+              </Link>
             </header>
             <main>
               <Container maxW={"container.md"}>{children}</Container>
