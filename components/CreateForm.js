@@ -1,6 +1,6 @@
 "use client";
 
-import { FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
+import { Box, Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useTask } from "@/context/TasksContext";
 import { useState } from "react";
 import ActionButton from "@/components/ActionButton";
@@ -12,6 +12,18 @@ export default function CreateForm() {
   const [color, setColor] = useState("");
   const { setTasks } = useTask();
   const router = useRouter();
+
+  const colors = [
+    "#FF3B30",
+    "#FF9500",
+    "#FFCC00",
+    "#34C759",
+    "#007AFF",
+    "#5856D6",
+    "#AF52DE",
+    "#FF2D55",
+    "#A2845E"
+  ];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,16 +41,36 @@ export default function CreateForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack gap={2}>
-        <FormControl>
-          <FormLabel>Title</FormLabel>
-          <Input
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-        </FormControl>
-        <ActionButton type={"submit"} />
-      </Stack>
+      <FormControl mb={4}>
+        <FormLabel color={"primary.400"} fontSize={14} fontWeight={700}>
+          Title
+        </FormLabel>
+        <Input
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+      </FormControl>
+      <FormControl mb={10}>
+        <FormLabel color={"primary.400"} fontSize={14} fontWeight={700}>
+          Color
+        </FormLabel>
+        <Flex justifyContent="space-between">
+          {colors?.map((item) => (
+            <Box
+              key={item}
+              bg={item}
+              h={"52px"}
+              w={"52px"}
+              borderRadius={"full"}
+              cursor={"pointer"}
+              borderWidth={item === color ? 3 : undefined}
+              borderColor={item === color ? "white" : undefined}
+              onClick={() => setColor(item)}
+            />
+          ))}
+        </Flex>
+      </FormControl>
+      <ActionButton type={"submit"} />
     </form>
   );
 }

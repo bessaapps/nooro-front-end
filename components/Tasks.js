@@ -59,7 +59,7 @@ export default function Tasks() {
           </Badge>
         </Flex>
       </Flex>
-      {tasks?.map(({ id, title, completed }) => (
+      {tasks?.map(({ id, title, color, completed }) => (
         <Flex
           key={id}
           bg={"gray.800"}
@@ -77,7 +77,11 @@ export default function Tasks() {
                 alt={completed ? "Completed Checkbox" : "Checkbox"}
               />
             </Box>
-            <Text as={completed ? "strike" : undefined} fontSize={14}>
+            <Text
+              as={completed ? "strike" : undefined}
+              color={color}
+              fontSize={14}
+            >
               {title}
             </Text>
           </Flex>
