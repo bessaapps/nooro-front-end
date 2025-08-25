@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
               </Link>
             </header>
             <main>
-              <Container maxW={"container.md"}>{children}</Container>
+              <Container maxW={"container.md"} py={8}>
+                {children}
+              </Container>
             </main>
           </Providers>
         </body>

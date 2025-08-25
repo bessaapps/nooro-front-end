@@ -6,7 +6,7 @@ import { Box, Stack } from "@chakra-ui/react";
 export default function TasksPage() {
   return (
     <Stack gap={8}>
-      <Box style={{ transform: "translateY(-20px)" }}>
+      <Box style={{ transform: "translateY(-52px)" }}>
         <Link href={"/tasks/create"}>
           <ActionButton />
         </Link>
